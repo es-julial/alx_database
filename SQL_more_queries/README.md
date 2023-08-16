@@ -1,8 +1,6 @@
 # SQL - More queries
 
-<p align="center>
-![Static Badge](https://zupimages.net/up/23/33/w7lo.png)
-</p>
+ ![Static Badge](https://zupimages.net/up/23/33/w7lo.png)
 
 <div class="panel panel-default" id="project-description">
   <div class="panel-body">
