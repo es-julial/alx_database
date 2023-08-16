@@ -1,27 +1,27 @@
 
--- 3. Always a name
+-- 5. Unique ID
 -- mandatory
 
--- Write a script that creates the table force_name on your MySQL server.
+-- Write a script that creates the table unique_id on your MySQL server.
 
---     force_name description:
---         id INT
---         name VARCHAR(256) can’t be null
+--     unique_id description:
+--         id INT with the default value 1 and must be unique
+--         name VARCHAR(256)
 --     The database name will be passed as an argument of the mysql command
---     If the table force_name already exists, your script should not fail
+--     If the table unique_id already exists, your script should not fail
 
--- guillaume@ubuntu:~/$ cat 3-force_name.sql | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- guillaume@ubuntu:~/$ cat 5-unique_id.sql | mysql -hlocalhost -uroot -p hbtn_0d_2
 -- Enter password: 
--- guillaume@ubuntu:~/$ echo 'INSERT INTO force_name (id, name) VALUES (89, "Holberton School");' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- guillaume@ubuntu:~/$ echo 'INSERT INTO unique_id (id, name) VALUES (89, "Holberton School");' | mysql -hlocalhost -uroot -p hbtn_0d_2
 -- Enter password: 
--- guillaume@ubuntu:~/$ echo 'SELECT * FROM force_name;' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- guillaume@ubuntu:~/$ echo 'SELECT * FROM unique_id;' | mysql -hlocalhost -uroot -p hbtn_0d_2
 -- Enter password: 
 -- id  name
 -- 89  Holberton School
--- guillaume@ubuntu:~/$ echo 'INSERT INTO force_name (id) VALUES (333);' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- guillaume@ubuntu:~/$ echo 'INSERT INTO unique_id (id, name) VALUES (89, "Holberton");' | mysql -hlocalhost -uroot -p hbtn_0d_2
 -- Enter password: 
--- ERROR 1364 (HY000) at line 1: Field 'name' doesn't have a default value
--- guillaume@ubuntu:~/$ echo 'SELECT * FROM force_name;' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- ERROR 1062 (23000) at line 1: Duplicate entry '89' for key 'id'
+-- guillaume@ubuntu:~/$ echo 'SELECT * FROM unique_id;' | mysql -hlocalhost -uroot -p hbtn_0d_2
 -- Enter password: 
 -- id  name
 -- 89  Holberton School
@@ -29,6 +29,6 @@
 
 -- //////////////////////////////////////////////////////////////////////////////
 
--- creates the table force_name on your MySQL server
--- creates a table in a database
-CREATE TABLE IF NOT EXISTS force_name (id INT, name VARCHAR(256) NOT NULL);
+-- creates the table unique_id on your MySQL server
+-- creates a table
+CREATE TABLE IF NOT EXISTS unique_id (id INT DEFAULT 1 UNIQUE, name VARCHAR(256));
