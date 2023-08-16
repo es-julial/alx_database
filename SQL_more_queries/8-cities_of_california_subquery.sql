@@ -1,34 +1,40 @@
 
--- 3. Always a name
+-- 8. Cities of California
 -- mandatory
 
--- Write a script that creates the table force_name on your MySQL server.
+-- Write a script that lists all the cities of California that can be found in the database hbtn_0d_usa.
 
---     force_name description:
---         id INT
---         name VARCHAR(256) can’t be null
+--     The states table contains only one record where name = California (but the id can be different, as per the example)
+--     Results must be sorted in ascending order by cities.id
+--     You are not allowed to use the JOIN keyword
 --     The database name will be passed as an argument of the mysql command
---     If the table force_name already exists, your script should not fail
 
--- guillaume@ubuntu:~/$ cat 3-force_name.sql | mysql -hlocalhost -uroot -p hbtn_0d_2
--- Enter password: 
--- guillaume@ubuntu:~/$ echo 'INSERT INTO force_name (id, name) VALUES (89, "Holberton School");' | mysql -hlocalhost -uroot -p hbtn_0d_2
--- Enter password: 
--- guillaume@ubuntu:~/$ echo 'SELECT * FROM force_name;' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- guillaume@ubuntu:~/$ echo 'SELECT * FROM states;' | mysql -hlocalhost -uroot -p hbtn_0d_usa
 -- Enter password: 
 -- id  name
--- 89  Holberton School
--- guillaume@ubuntu:~/$ echo 'INSERT INTO force_name (id) VALUES (333);' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- 1   California
+-- 2   Arizona
+-- 3   Texas
+-- 4   Utah
+-- guillaume@ubuntu:~/$ echo 'SELECT * FROM cities;' | mysql -hlocalhost -uroot -p hbtn_0d_usa
 -- Enter password: 
--- ERROR 1364 (HY000) at line 1: Field 'name' doesn't have a default value
--- guillaume@ubuntu:~/$ echo 'SELECT * FROM force_name;' | mysql -hlocalhost -uroot -p hbtn_0d_2
+-- id  state_id    name
+-- 1   1   San Francisco
+-- 2   1   San Jose
+-- 4   2   Page
+-- 6   3   Paris
+-- 7   3   Houston
+-- 8   3   Dallas
+-- guillaume@ubuntu:~/$ cat 8-cities_of_california_subquery.sql | mysql -hlocalhost -uroot -p hbtn_0d_usa
 -- Enter password: 
 -- id  name
--- 89  Holberton School
+-- 1   San Francisco
+-- 2   San Jose
 -- guillaume@ubuntu:~/$ 
 
 -- //////////////////////////////////////////////////////////////////////////////
 
--- creates the table force_name on your MySQL server
--- creates a table in a database
-CREATE TABLE IF NOT EXISTS force_name (id INT, name VARCHAR(256) NOT NULL);
+-- lists all the cities of California that can be found in the database hbtn_0d_usa
+-- lists all rows of a column in a database
+SELECT id, name FROM cities WHERE state_id = (SELECT id FROM states WHERE name = 'California') ORDER BY id ASC;
+
